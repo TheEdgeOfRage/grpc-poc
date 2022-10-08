@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package results.api.v1;
+
+option go_package = "grpc-test/gen/proto/go/results/api/v1";
+
+service TestService {
+  rpc GetResults(GetResultsRequest) returns (stream DataChunk) {}
+  rpc GetStatus(GetStatusRequest) returns (GetStatusResponse) {}
+}
+
+message GetResultsRequest {
+  string id = 1;
+}
+
+message DataChunk {
+  bytes data = 1;
+  int64 size = 2;
+}
+
+message GetStatusRequest {
+  string msg = 1;
+}
+
+message GetStatusResponse {
+  bool ok = 1;
+  string msg = 2;
+}
